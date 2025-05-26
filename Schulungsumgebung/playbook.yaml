@@ -14,9 +14,14 @@
         state: disabled
 
     - name: Install needed packages
-      tags: execute
+      tags: execute-not
       become: true
       ansible.builtin.dnf: name=docker-compose,unzip,git,time,bc,chromium,gedit,net-tools,java-21-openjdk-devel.x86_64,pip,xorg-x11-xauth,webkit2gtk3 state=installed
+
+    - name: Install needed packages # einfach mit shell weil dnf irgendein problem hat.
+      tags: execute
+      become: true
+      ansible.builtin.shell: sudo dnf install -y docker-compose unzip git time bc chromium gedit net-tools java-21-openjdk-devel.x86_64 maven pip xorg-x11-xauth webkit2gtk3
 
     - name: Install python dependencies
       tags: execute
@@ -53,9 +58,14 @@
         append: true
 
     - name: Install docker
-      tags: execute
+      tags: execute-not
       become: true
       ansible.builtin.dnf: name=docker state=installed
+
+    - name: Install docker
+      tags: execute
+      become: true
+      ansible.builtin.shell: dnf install -y docker
 
     - name: Start and enable docker
       tags: execute
@@ -208,3 +218,61 @@
          Mounts im Container
            /host innerhalb des Containers zeigt auf / der VM
            /host/home/{{ linux_user }} innerhalb des Containers ist daher das HOME-Verzeichnis des VM-Users
+
+##############################
+### Start Workshop Inhalte ###
+##############################
+
+    - name: Clone Quarkus Quickstarts
+      tags: execute
+      ansible.builtin.git:
+        repo: https://github.com/quarkusio/quarkus-quickstarts.git
+        dest: "{{ ansible_env.HOME }}/Quarkus-Quickstarts"
+        version: refs/tags/3.22.2
+
+    - name: Copy Example getting started
+      tags: execute
+      ansible.builtin.copy:
+        src: "{{ ansible_env.HOME }}/Quarkus-Quickstarts/getting-started/"
+        dest: "{{ ansible_env.HOME }}/Uebungen/0_getting-started/"
+        remote_src: true
+
+    - name: Copy Example Database
+      tags: execute
+      ansible.builtin.copy:
+        src: "{{ ansible_env.HOME }}/Quarkus-Quickstarts/hibernate-orm-quickstart/"
+        dest: "{{ ansible_env.HOME }}/Uebungen/1_database/"
+        remote_src: true
+
+    - name: Copy Example LGTM / Troubleshooting
+      tags: execute
+      ansible.builtin.copy:
+        src: "{{ ansible_env.HOME }}/Quarkus-Quickstarts/opentelemetry-quickstart/"
+        dest: "{{ ansible_env.HOME }}/Uebungen/2_monitoring_troubleshooting/"
+        remote_src: true
+
+    - name: Create directories
+      tags: execute
+      become: true
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        mode: '0777'
+      with_items:
+        - /deployments/0_getting-started/
+        - /deployments/1_database/
+        - /deployments/2_monitoring_troubleshooting/
+
+    - name: Add aliases
+      tags: execute
+      loop:
+        - alias cdu1="cd {{ ansible_env.HOME }}/Uebungen/0_getting-started/"
+        - alias cdu2="cd {{ ansible_env.HOME }}/Uebungen/1_database/"
+        - alias cdu3="cd {{ ansible_env.HOME }}/Uebungen/2_monitoring_troubleshooting/"
+        - alias cdd1="cd /deployments/0_getting-started/"
+        - alias cdd2="cd /deployments/1_database/"
+        - alias cdd3="cd /deployments/2_monitoring_troubleshooting/"
+      ansible.builtin.lineinfile:
+        path: "{{ ansible_env.HOME }}/.bashrc"
+        line: "{{ item }}"
+
