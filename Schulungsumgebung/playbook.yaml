@@ -276,3 +276,10 @@
         path: "{{ ansible_env.HOME }}/.bashrc"
         line: "{{ item }}"
 
+    - name: Copy scripts
+      tags: execute-only
+      ansible.builtin.copy:
+        src: scripts/lgtmtest.sh
+        dest: "{{ ansible_env.HOME }}/bin/"
+        mode: 0777
+
