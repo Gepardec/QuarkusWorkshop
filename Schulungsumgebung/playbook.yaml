@@ -145,20 +145,6 @@
     - name: Change Password in Webtop
       ansible.builtin.shell: docker exec -it webtop /bin/sh -c "echo abc:{{ webtop_password }} | sudo chpasswd"
 
-    - name: Create desktop shortcut file explorer to home VM via Link
-      tags: execute
-      ansible.builtin.copy:
-        dest: "webtop/Desktop/home_training.desktop"
-        mode: '0755'
-        content: |
-          [Desktop Entry]
-          Version=1.0
-          Type=Link
-          Name=Home Training
-          Comment=Users Home
-          Icon=user-bookmarks
-          URL=/host/home/{{ linux_user }}
-
     - name: Create desktop shortcut file explorer to home VM via sftp
       tags: execute
       ansible.builtin.copy:
@@ -209,15 +195,11 @@
         mode: '0644'
         content: |
          Eigenheiten der Umgebung:
-         Der Dektop läuft innerhalb eines Docker Containers in der VM
+         Der Desktop läuft innerhalb eines Docker Containers in der VM
 
          Icons:
             "Home VM": Anzeigen des HOME-Verzeichnisses der VM
             "Terminal VM": SSH-Verbindung zur VM
-
-         Mounts im Container
-           /host innerhalb des Containers zeigt auf / der VM
-           /host/home/{{ linux_user }} innerhalb des Containers ist daher das HOME-Verzeichnis des VM-Users
 
 ##############################
 ### Start Workshop Inhalte ###
@@ -282,4 +264,18 @@
         src: scripts/lgtmtest.sh
         dest: "{{ ansible_env.HOME }}/bin/"
         mode: 0777
+
+    - name: Create Miro Board Link
+      tags: execute
+      ansible.builtin.copy:
+        dest: "webtop/Desktop/miro_board.desktop"
+        mode: '0755'
+        content: |
+          [Desktop Entry]
+          Version=1.0
+          Type=Link
+          Name=Miro Board
+          Comment=Link zu Präsentation und Übungen
+          Icon=user-bookmarks
+          URL=https://miro.com/TBD
 
