@@ -35,6 +35,8 @@ Zuerst die benötigen ansible collections herunterladen mit:
 ansible-galaxy collection install -r requirements.yml
 ----
 
+Miro Link anpassen in playbook.yaml, suche nach URL=https://miro.com/TBD
+
 Danach kann das ansible-playbook ausgeführt werden.
 [source,shell]
 ----
@@ -53,7 +55,7 @@ Z.B:
 ----
 ssh fedora@3.71.32.5
 ----
-Lokaler Public-Key sollte am Host sein.
+Lokaler Public-Key ist am Host sein.
 
 SSH von Webtop zum Host:
 ----
