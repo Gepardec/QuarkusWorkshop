@@ -277,7 +277,7 @@
         line: "{{ item }}"
 
     - name: Copy scripts
-      tags: execute-only
+      tags: execute
       ansible.builtin.copy:
         src: scripts/lgtmtest.sh
         dest: "{{ ansible_env.HOME }}/bin/"
