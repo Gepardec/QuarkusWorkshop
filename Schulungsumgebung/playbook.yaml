@@ -125,7 +125,7 @@
       tags: execute
       community.docker.docker_container:
         name: webtop
-        image: lscr.io/linuxserver/webtop:fedora-xfce
+        image: lscr.io/linuxserver/webtop:fedora-xfce-01b301b8-ls193
         state: started
         env:
           PUID: "1000"
