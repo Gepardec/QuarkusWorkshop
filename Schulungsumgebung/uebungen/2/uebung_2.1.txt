@@ -1,0 +1,12 @@
+cdu2 (Bash Alias um in das Übungsverzeichnis zu wechseln)
+cdd2 (Bash Alias um in das Deploymentverzeichnis zu wechseln)
+
+Bau das Projekt mittels: mvn clean package -DskipTests
+Kopiere den gesamten Inhalt von target/quarkus-app/* nach /deployments/1_database/
+
+Starte die Datenbank mittels:
+docker run -d --rm=true --name quarkus_prod -e POSTGRES_USER=quarkus_prod -e POSTGRES_PASSWORD=quarkus_prod -e POSTGRES_DB=quarkus_prod -p 5432:5432 postgres:13.3
+
+Starte die Applikation
+
+Wie ist die Applikation derzeit konfiguriert?

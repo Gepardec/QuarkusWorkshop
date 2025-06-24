@@ -40,9 +40,8 @@
         - Downloads
         - webtop/Desktop
         - webtop/.config
-        - elastic-apm
 
-    - name: Ensure group "docker" exists
+    - name: Ensure group docker exists
       tags: execute
       become: true
       ansible.builtin.group:
@@ -123,6 +122,7 @@
 
     - name: Run Webtop
       tags: execute
+      become: true
       community.docker.docker_container:
         name: webtop
         image: lscr.io/linuxserver/webtop:fedora-xfce-01b301b8-ls193
@@ -219,6 +219,12 @@
         dest: "{{ ansible_env.HOME }}/Uebungen/0_getting-started/"
         remote_src: true
 
+    - name: Copy Uebung1
+      tags: execute
+      ansible.builtin.copy:
+        src: "uebungen/1/"
+        dest: "{{ ansible_env.HOME }}/Uebungen/0_getting-started/"
+
     - name: Copy Example Database
       tags: execute
       ansible.builtin.copy:
@@ -226,12 +232,24 @@
         dest: "{{ ansible_env.HOME }}/Uebungen/1_database/"
         remote_src: true
 
+    - name: Copy Uebung2
+      tags: execute
+      ansible.builtin.copy:
+        src: "uebungen/2/"
+        dest: "{{ ansible_env.HOME }}/Uebungen/1_database/"
+
     - name: Copy Example LGTM / Troubleshooting
       tags: execute
       ansible.builtin.copy:
         src: "{{ ansible_env.HOME }}/Quarkus-Quickstarts/opentelemetry-quickstart/"
         dest: "{{ ansible_env.HOME }}/Uebungen/2_monitoring_troubleshooting/"
         remote_src: true
+
+    - name: Copy Uebung3
+      tags: execute
+      ansible.builtin.copy:
+        src: "uebungen/3/"
+        dest: "{{ ansible_env.HOME }}/Uebungen/2_monitoring_troubleshooting/"
 
     - name: Create directories
       tags: execute

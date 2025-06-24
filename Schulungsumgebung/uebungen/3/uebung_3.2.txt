@@ -1,0 +1,5 @@
+Führe das Bash Script lgtmtest.sh aus. (Ist im PATH)
+
+Warte etwas damit Daten rein kommen. Alle 2 Minuten wird gescraped.
+
+Schau dich in Grafana um. Die URL zu Grafana findest du in der Dev UI.

@@ -1,0 +1,12 @@
+cdu3 (Bash Alias um in das Verzeichnis zu wechseln)
+
+Starte die Applikation im Dev Mode mittels: mvn quarkus:dev -DskipTests
+
+Schau dir die Dev UI an http://localhost:8080/q/dev-ui/ (hat auch einen Editor)
+
+Füge die Extension quarkus-info hinzu
+Öffne https://localhost:8080/q/info
+
+Konfiguriere die Applikation so, dass der info Endpunkt auf einem anderen Port abrufbar ist. (Stichwort Management Endpunkt)
+
+Füge nun auch einen Health Endpunkt hinzu. (SmallRye Health)

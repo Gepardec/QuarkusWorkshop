@@ -1,0 +1,7 @@
+Weitere Konfigurationen:
+Suche in https://quarkus.io/guides/all-config nach der Konfiguration,
+um die Applikation auf einem andern HTTP Port laufen zu lassen.
+
+Starte die Applikation so, dass ein gc.log geschrieben wird.
+
+Starte die Applikation mit einer maximalen Heapsize von 1 GB

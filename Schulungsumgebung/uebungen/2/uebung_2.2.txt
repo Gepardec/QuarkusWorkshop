@@ -1,0 +1,8 @@
+Konfiguriere die Datenbankverbindung der Applikation jeweils mit:
+    1. System Properties
+    2. Environment Variablen
+    3. application.properties
+        a. Starte die Applikation auch außerhalb des Working Directories
+
+
+Welche Art findest du am besten?

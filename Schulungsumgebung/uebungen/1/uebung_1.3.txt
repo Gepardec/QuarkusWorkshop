@@ -1,0 +1,11 @@
+cdu1 (Bash Alias um in das Übungsverzeichnis zu wechseln)
+cdd1 (Bash Alias um in das Deploymentverzeichnis zu wechseln)
+
+Bau das Projekt mittels: mvn clean package -Pnative -DskipTests
+und warte...
+und warte...
+und warte...
+Kopiere die Datei target/getting-started-1.0.0-SNAPSHOT-runner nach /deployments/0_getting-started/
+Führe die Quarkus App aus mittels: getting-started-1.0.0-SNAPSHOT-runner
+Teste ob die Applikation aufrufbar ist: http://localhost:8080/hello
+Wenn du fertig bist lösche alles in /deployments/0_getting-started/*

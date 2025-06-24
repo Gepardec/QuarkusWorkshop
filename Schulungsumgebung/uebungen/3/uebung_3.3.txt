@@ -1,0 +1,16 @@
+Sammle Daten!
+
+Hol dir die PID von der Applikation:
+jcmd
+
+Erstelle einen Thread Dump:
+jstack <PID> > first.jstack
+
+Lass dir das Memory anzeigen:
+jstat -gc <PID> 2s
+
+Erstelle einen Heapdump:
+jcmd <PID> GC.heap_dump heapdump.hprof
+
+Erstelle ein Flightrecording:
+jcmd <PID> JFR.start duration=1m filename=flightrecording.jfr
